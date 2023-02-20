@@ -1,4 +1,4 @@
-# st-bot
+# yst-bot
 This is a bot designed to run on a container, to download videos via telegram.
 ## Features
 Currently it can download only youtube shorts and tiktok videos, due the size limitation of the telegram api.
