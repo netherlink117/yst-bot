@@ -1,0 +1,27 @@
+# image for youtube-dl, yt-dlp and other python cli tools using python slim image version 3.10.1
+FROM python:3.10.1-slim
+# set cli workdir to bot path
+WORKDIR /st-bot
+# update local registry versions
+RUN apt update
+# upgrade local packages based on updated registries
+RUN apt -y upgrade
+# install ranger for graphical file browsing at CLI
+RUN apt -y install ranger
+# install vim for text-based file editing
+RUN apt -y install vim
+# install python3 and ffmpeg as they are required by youtube-dl and instaloader
+RUN apt -y install ffmpeg
+# install curl and wget and other utils
+RUN apt -y install curl wget htop
+# install pip utils youtube-dl
+RUN pip3 install -U youtube_dl yt-dlp requests
+# copy src and data, I've put it here to reduce build time and by using cache
+RUN mkdir data
+RUN mkdir src
+COPY data/* ./data
+COPY src/* ./src
+# copy strit tha triggers the bot at start with docker composer
+COPY start ./start
+# use bash instead of sh on each exec
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh

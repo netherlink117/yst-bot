@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  # name for the cli service which will use for scripts and data related to scripts
+  python:
+    # name for container
+    container_name: st-bot
+    # build from Dockerfile at . context
+    build:
+      context: .
+      dockerfile: ./Dockerfile.python3.10.1-slim
+    # name for the image
+    image: netherlink117:st-bot
+    # restart after stopped, but only if not stopped by user
+    restart: unless-stopped
+    # allow bash to keep alive
+    tty: true
+    # allow bash to receive data from CLI
+    stdin_open: true
+    # run bash just to avoid the stop of the container while using command statement
+    command:  [ "bash", "-c", "/st-bot/start; bash" ]
