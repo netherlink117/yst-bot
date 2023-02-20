@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 /st-bot/src/main.py
